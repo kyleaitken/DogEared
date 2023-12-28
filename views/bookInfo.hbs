@@ -1,0 +1,11 @@
+<h3>{{this.title}}</h3>
+<div> 
+   {{#each songEntries}} 
+      <h1 class="bg-primary text-white">{{this.id}}:  {{this.title}} </h1> 
+      <p>composer: {{this.composer}}</p> 
+      <p>key: {{this.key}}</p> 
+	  <div class="jumbotron">
+      <p class="text-primary">bars: {{this.bars}}</p> 
+	  </div>
+	{{/each}} 
+</div>

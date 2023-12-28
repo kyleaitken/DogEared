@@ -1,0 +1,16 @@
+<div class="mainContentContainer">
+  <h3>{{contentHeader}}</h3>
+  <div class="homeContent">
+    {{#each homeContent}}
+        <div class="homeContent_row"> 
+            {{#each this}}
+                <div class="book">
+                    <a href='book/{{this.id}}'>
+                        <img src="{{this.volumeInfo.imageLinks.thumbnail}}" alt="Book cover">
+                    </a>
+                </div> 
+            {{/each}}
+        </div>
+    {{/each}}
+  </div>
+</div>

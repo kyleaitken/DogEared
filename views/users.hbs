@@ -1,0 +1,21 @@
+<div id="usersWrapper">
+   <div id="usersContainer">
+      <div id="userInfoColumnHeadings">
+         <p>Username</p>
+         <p>Password</p>
+         <p>Permissions</p>
+      </div>
+      <ul>
+         {{#each users}}
+            <li>
+                <div class="userRow">
+                   <p>{{this.username}}</p>
+                   <p>{{this.password}}</p>
+                   <p>{{this.type}}</p>
+               </div>
+            </li>        
+         {{/each}}
+      </ul>
+   </div>
+
+</div>

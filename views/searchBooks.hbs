@@ -1,0 +1,35 @@
+<div class="mainContentContainer">
+    <div class="booksTableTitle"> 
+        <p>Search Results for: {{searchResults.searchString}}</p>
+    </div>
+    <div class="booksTableContainer">
+    {{#if searchResults.length}}
+        <table id="searchTable">
+            <tbody id="books_tbody">
+                <tr>
+                    <td></td>
+                    <td id="titleColHeading"><strong>Title</strong></td>
+                    <td id="authorColHeading"><strong>Author</strong></td>
+                    <td></td>
+                </tr>
+                {{#each searchResults}}
+                    <tr class="myBooksRow" id="{{this.id}}">
+                        <td class="thumbnailCol">
+                            <a href='book/{{this.id}}'>
+                                <img id="myBooksThumb" src="{{this.volumeInfo.imageLinks.thumbnail}}">
+                            </a>
+                        </td>
+                        <td class="titleCol">{{this.volumeInfo.title}}</td>
+                        <td class="authorCol">{{this.volumeInfo.authors.[0]}}</td>
+                        <td class="addToFav">
+                            <button class="addToFavButton" onclick="addToFavourites('{{this.id}}')">Add To Favourites</button>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}} 
+        <p>No Results Found</p>
+    {{/if}}   
+    </div>
+</div>

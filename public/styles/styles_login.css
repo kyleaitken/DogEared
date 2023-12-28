@@ -1,0 +1,72 @@
+body {
+    background-image: url('/images/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 25%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#username, #password, #reg_username, #reg_password {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    width: 90%;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+}
+
+.login_box, .register_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#login_form, #register_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+#login_button, #register_button {
+    background-color: #3872e7;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    width: 80%;
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: center;
+    height: 60px;
+}
+
+#go_to_register {
+    cursor: pointer;
+    padding: 12px 20px;
+    width: 80%;
+    align-self: center;
+    height: auto;
+    height: 60px;
+
+}
+
+#logo {
+    max-width: 70%;
+    height: auto;
+    align-self: center;
+}
+
+#or {
+    align-self: center;
+}

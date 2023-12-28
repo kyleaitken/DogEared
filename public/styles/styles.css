@@ -1,0 +1,189 @@
+.mainContentContainer, .myBooksContainer, #usersWrapper {
+    margin-top: 100px;
+    min-height: 100vh;
+
+}
+
+.myBooksContainer {
+    margin-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    font-size: 16px;
+
+}
+
+
+.mainContentContainer > h3 {
+    text-align: center;
+    
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    min-height: 100%;
+    position: relative;
+}
+
+.siteFooter {
+    width: 100%;
+    height: 80px;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+.siteFooter > h3 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.homeContent {
+    display: flex;
+    flex-direction: column;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+.homeContent_row {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.book {
+    margin-bottom: 50px;
+}
+
+img {
+    width: 150px;
+    height: auto;
+}
+
+h5 {
+    line-height: 40px; /* set line-height equal to fixed height */
+}
+
+.bookPageContainer {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+#bookOverview {
+    margin-bottom: 30px;
+}
+
+#bookContainer {
+    display: flex;
+}
+
+#bookInfoContainer {
+    min-width: 800px;
+    margin-left: 40px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+#bookThumbnailContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#authorColHeading, #titleColHeading {
+    text-align: center;
+}
+
+
+.titleCol {
+    min-width: 400px;
+    text-align: center;
+}
+
+.authorCol {
+    min-width: 250px;
+    text-align: center;
+}
+
+.myBooksRow {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.booksTableContainer {
+    padding-top: 25px;
+}
+
+
+#myBooksThumb {
+    width: 75%;
+    height: 75%;
+    padding-top: 20px;
+}
+
+.booksTableTtitle {
+    text-align: center;
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.removeFromFavButton, .addToFavButton {
+    border-radius: 5px;
+    width: 200px;
+    background-color: royalblue;
+    color: white;
+    font-size: 15px;
+    padding: 4px;
+}
+
+.siteFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#logout {
+    font-size: 15px;
+    padding-bottom: 5px;
+    margin-bottom: 5px
+}
+
+#usersContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#userInfoColumnHeadings {
+    display: flex;
+}
+
+#userInfoColumnHeadings > p {
+    margin-right: 100px;
+    min-width: 100px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.userRow {
+    display: flex;
+}
+
+.userRow > p {
+    margin-right: 100px;
+    min-width: 100px;
+}

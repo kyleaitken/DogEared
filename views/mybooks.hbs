@@ -1,0 +1,35 @@
+<div class="myBooksContainer">
+    <div class="booksTableTitle">
+        <p>My Favourite Books</p>
+    </div>
+    <div class="booksTableContainer">
+        {{#if myBooks.length}}
+            <table id="myBooksTable">
+                <tbody id="books_tbody">
+                    <tr>
+                        <td></td>
+                        <td id="titleColHeading"><strong>Title</strong></td>
+                        <td id="authorColHeading"><strong>Author</strong></td>
+                        <td></td>
+                    </tr>
+                    {{#each myBooks}}
+                        <tr class="myBooksRow" id="{{this.bookid}}">
+                            <td class="thumbnailCol">
+                                <a href='book/{{this.bookid}}'>
+                                     <img id="myBooksThumb" src="{{this.thumbnail}}">
+                                </a>
+                            </td>
+                            <td class="titleCol">{{this.title}}</td>
+                            <td class="authorCol">{{this.author}}</td>
+                            <td class="removeFromFav">
+                                <button class="removeFromFavButton" onclick="removeFromFavourites('{{this.bookid}}')">Remove From Favourites</button>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{else}} 
+            <p>No Favourites Found</p>
+        {{/if}}   
+    </div>
+</div>

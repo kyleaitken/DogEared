@@ -1,0 +1,23 @@
+<div class="bookPageContainer">
+   <h2 id="bookOverview">Book Overview</h2>
+   <div id="bookContainer">
+      <div id="bookThumbnailContainer">
+         <img src="{{book.volumeInfo.imageLinks.thumbnail}}" alt="Book cover">
+         <button id="addToFavouritesButton" onclick="addToFavourites('{{book.id}}')">Add to Favourites</button>
+      </div>
+      <div id="bookInfoContainer">
+         <p id="bookTitle">{{book.volumeInfo.title}}</p>
+         <p id="bookSubTitle">{{book.volumeInfo.subtitle}}</p>
+         <p id="bookDescription">{{book.volumeInfo.description}}</p>
+         <div id="extraInfoContainer">
+            <ul>
+               <li id="author"><strong>Author: </strong>{{book.volumeInfo.authors.[0]}}</li>
+               <li id="genre"><strong>Genre: </strong>{{book.volumeInfo.categories/[0]}}</li>
+               <li id="releaseDate"><strong>Release Date: </strong>{{book.volumeInfo.publishedDate}}</li>
+               <li id="pageCount"><strong>Page Count: </strong>{{book.volumeInfo.pageCount}}</li>
+               <li id="language"><strong>Language: </strong>{{book.volumeInfo.language}}</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
