@@ -8,6 +8,7 @@ const res = require('express/lib/response');
 var sqlite3 = require('sqlite3').verbose(); //verbose provides more detailed stack trace
 const db = new sqlite3.Database('data/books.db');
 const apiKey = 'AIzaSyBHYwiyZy4Ah6jcRY7E98TAzBI5qocXC6g'
+const bcrypt = require('bcrypt');
 
 // Parses the URL
 function parseURL(request, response){
@@ -35,66 +36,85 @@ exports.register = function (request, response) {
 	response.render('register', {layout: 'loginLayout'});
 }
 
-
-// Registers a new user, adds them to the database
-exports.registerUser = function (request, response) {
+exports.registerUser = async function (request, response) {
 
 	const data = request.body;
     const username = data.username;
     const password = data.password;
 
-	let sqlString = `INSERT INTO users (username, password, type) VALUES ('${username}', '${password}', 'guest')`;
-	db.run(sqlString, function (err) {
-		if (err) {
-			console.log('Error registering user:', err);
-			response.status(500).json({ error: 'Internal Server Error' });
-		} else {
-			console.log('User registered successfully!');
-			response.redirect('/login');
-		}
+	try {
+		const saltRounds = 10;
+		const salt = await bcrypt.genSalt(saltRounds);
+		const hashedPassword = await bcrypt.hash(password, salt);
 
-		response.end();
-	});
+		let sqlString = `INSERT INTO users (username, password, type) VALUES ('${username}', '${hashedPassword}', 'guest')`;
+
+		db.run(sqlString, function (err) {
+			if (err) {
+				console.log('Error registering user:', err);
+				response.status(500).json({ error: 'Internal Server Error' });
+			} else {
+				console.log('User registered successfully!');
+				response.redirect('/login');
+			}
+	
+			response.end();
+		});
+
+	} catch {
+		console.error('Error hashing password:', error);
+        response.status(500).json({ error: 'Internal Server Error' });
+	}
 
 }	
 
 
 // Attempts to authenticate the user from the user database
-exports.authenticate = function (request, response) {
+exports.authenticate = async function (request, response) {
 	// check if user is in data base 
 	const data = request.body;
 	const username = data.username;
 	const password = data.password;
 
-	// rest of your code
-	let sqlString = `SELECT username, password, type FROM users WHERE username = '${username}'`
-	db.all(sqlString, (err, rows) => {
-		if (err) {
-			console.error(err);
-			response.status(500).json({ error: 'Internal Server Error' });
-			return;
-		}
-
-		if (rows.length > 0 && rows[0].password === password) {
-			console.log('found user')
-			const userType = rows[0].type;
-			if (userType === 'admin') {
-				request.session.isAdmin = true;
-			} else {
-				request.session.isAdmin = false;
+	try {
+		let sqlString = `SELECT username, password, type FROM users WHERE username = '${username}'`
+		db.all(sqlString, async (err, rows) => {
+			if (err) {
+				console.error(err);
+				response.status(500).json({ error: 'Internal Server Error' });
+				return;
 			}
-			request.session.isLoggedOn = true;
-			request.session.username = username;
-			console.log("request session username added: " + username)
-			
-			console.log('valid user')
-			response.status(200).send('Successful login');
-		} else {
-			// not authenticated
-			console.log("Invalid username or password")
-			response.status(401).json({error: "Invalid username and password"})
-		}
-	})
+	
+			if (rows.length > 0) {
+				const hashedPassword = rows[0].password;
+				const passwordMatch = await bcrypt.compare(password, hashedPassword);
+	
+				if (passwordMatch) {
+					const userType = rows[0].type;
+					if (userType === 'admin') {
+						request.session.isAdmin = true;
+					} else {
+						request.session.isAdmin = false;
+					}
+					request.session.isLoggedOn = true;
+					request.session.username = username;
+	
+					console.log('valid user')
+					response.status(200).send('Successful login');
+				} else  {
+					console.log('Invalid username or password');
+					response.status(401).json({ error: 'Invalid username and password' });
+				}
+			} else {
+				console.log("User not found")
+				response.status(401).json({ error: 'Invalid username and password' });
+			}
+		})
+
+	} catch {
+		console.error('Error comparing passwords:', error);
+        response.status(500).json({ error: 'Internal Server Error' });
+	}
 
 }
 
